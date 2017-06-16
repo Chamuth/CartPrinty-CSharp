@@ -5,8 +5,132 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:csharp_cartprinty"
         mc:Ignorable="d"
-        Title="MainWindow" Height="350" Width="525">
+        Title="MainWindow" Height="600" Width="300">
     <Grid>
-        
+        <FlowDocumentReader x:Name="Document">
+            <FlowDocument FlowDirection="LeftToRight">
+                <Section x:Name="header">
+
+                    <Paragraph Margin="0,0,0,10" TextAlignment="Center">
+                        <Image Source="C:\Users\Chamuth\Pictures\010ea715878505.5629828a3e4d7.png" Height="75px"></Image></Paragraph>
+                    
+                    <Paragraph Margin="0" FontWeight="Bold" FontSize="20px " TextAlignment="Center">ATUKORALA</Paragraph>
+                    <Paragraph Margin="0,5,0,0" FontSize="15px" TextAlignment="Center" FontWeight="Bold">BAKERY AND RESTAURANT</Paragraph>
+                    <Paragraph Margin="0,10,0,0" FontSize="12px" TextAlignment="Center">NO:69, MAIN STREET,</Paragraph>
+                    <Paragraph Margin="0,10,0,0" FontSize="12px" TextAlignment="Center">KEGALLE.</Paragraph>
+
+                    <Table>
+                        <TableRowGroup FontSize="12">
+                            <TableRow>
+                                <TableCell>
+                                    <Paragraph>Date : 01/05/2017</Paragraph>
+                                </TableCell>
+                                <TableCell>
+                                    <Paragraph>Operator : NIGGA</Paragraph>
+                                </TableCell>
+                            </TableRow>
+                            <TableRow>
+                                <TableCell>
+                                    <Paragraph>Bill No : 0000485</Paragraph>
+                                </TableCell>
+                                <TableCell>
+                                    <Paragraph>Unit: 1</Paragraph>
+                                </TableCell>
+                            </TableRow>
+                        </TableRowGroup>
+                    </Table>
+               
+                </Section>
+
+                <Section x:Name="cart" BorderBrush="Red">
+                    <Table>
+                        <TableRowGroup FontSize="13">
+                            <TableRow FontWeight="Bold">
+                                <TableCell>
+                                    <Paragraph>Product</Paragraph>
+                                </TableCell>
+                                <TableCell>
+                                    <Paragraph>Price</Paragraph>
+                                </TableCell>
+                                <TableCell>
+                                    <Paragraph>Qty</Paragraph>
+                                </TableCell>
+                                <TableCell>
+                                    <Paragraph>Amount</Paragraph>
+                                </TableCell>
+                            </TableRow>
+                            <TableRow>
+                                <TableCell>
+                                    <Paragraph>GRAND TEA</Paragraph>
+                                </TableCell>
+                                <TableCell>
+                                    <Paragraph>200.00</Paragraph>
+                                </TableCell>
+                                <TableCell>
+                                    <Paragraph>2</Paragraph>
+                                </TableCell>
+                                <TableCell>
+                                    <Paragraph>400.00</Paragraph>
+                                </TableCell>
+                            </TableRow> 
+                        </TableRowGroup>
+                    </Table>
+
+                </Section>
+
+                <Section x:Name="calculations">
+                    <Table>
+                        <TableRowGroup Paragraph.TextAlignment="Left">
+                            <TableRow FontSize="15">
+                                <TableCell>
+                                    <Paragraph FontWeight="Bold">SUB TOTAL</Paragraph>
+                                </TableCell>
+                                <TableCell TextAlignment="Right">
+                                    <Paragraph>400.00</Paragraph>
+                                </TableCell>
+                            </TableRow>
+                            
+                            <TableRow FontSize="15px">
+                                <TableCell>
+                                </TableCell>
+                            </TableRow>
+
+                            <TableRow FontSize="11">
+                                <TableCell>
+                                    <Paragraph FontWeight="Bold">CASH</Paragraph>
+                                </TableCell>
+                                <TableCell TextAlignment="Right">
+                                    <Paragraph>500.00</Paragraph>
+                                </TableCell>
+                            </TableRow>
+
+                            <TableRow FontSize="11">
+                                <TableCell>
+                                    <Paragraph FontWeight="Bold">BALANCE</Paragraph>
+                                </TableCell>
+                                <TableCell TextAlignment="Right">
+                                    <Paragraph>100.00</Paragraph>
+                                </TableCell>
+                            </TableRow>
+                            
+                            <TableRow FontSize="11">
+                                <TableCell>
+                                    <Paragraph FontWeight="Bold">ORDER NO</Paragraph>
+                                </TableCell>
+                                <TableCell TextAlignment="Right">
+                                    <Paragraph>25197</Paragraph>
+                                </TableCell>
+                            </TableRow>
+
+                        </TableRowGroup>
+                    </Table>                   
+                </Section>
+
+                <Section x:Name="footer" Margin="0,50,0,0">
+                    <Paragraph FontSize="12" Margin="0" TextAlignment="Center">THANK YOU COME AGAIN</Paragraph>
+                    <Paragraph Margin="10" FontSize="10px" Foreground="Gray" TextAlignment="Center">CartPrinty (ninponix.com/cartprinty)</Paragraph>
+                </Section>
+            </FlowDocument>
+        </FlowDocumentReader>
     </Grid>
 </Window>

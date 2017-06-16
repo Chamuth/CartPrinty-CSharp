@@ -5,6 +5,8 @@ VisualStudioVersion = 14.0.25123.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "csharp-cartprinty", "csharp-cartprinty\csharp-cartprinty.csproj", "{1461A5F4-86E6-4CF0-84E2-2AECD7694656}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "csharp-cartprinty-sdk", "csharp-cartprinty-sdk\csharp-cartprinty-sdk.csproj", "{DCBC9A28-844A-4A1B-A877-41B7DAACFDCB}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +17,10 @@ Global
 		{1461A5F4-86E6-4CF0-84E2-2AECD7694656}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{1461A5F4-86E6-4CF0-84E2-2AECD7694656}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{1461A5F4-86E6-4CF0-84E2-2AECD7694656}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DCBC9A28-844A-4A1B-A877-41B7DAACFDCB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DCBC9A28-844A-4A1B-A877-41B7DAACFDCB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DCBC9A28-844A-4A1B-A877-41B7DAACFDCB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DCBC9A28-844A-4A1B-A877-41B7DAACFDCB}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
