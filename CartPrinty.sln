@@ -4,6 +4,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 VisualStudioVersion = 14.0.25123.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "csharp-cartprinty", "csharp-cartprinty\csharp-cartprinty.csproj", "{1461A5F4-86E6-4CF0-84E2-2AECD7694656}"
+	ProjectSection(ProjectDependencies) = postProject
+		{DCBC9A28-844A-4A1B-A877-41B7DAACFDCB} = {DCBC9A28-844A-4A1B-A877-41B7DAACFDCB}
+	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "csharp-cartprinty-sdk", "csharp-cartprinty-sdk\csharp-cartprinty-sdk.csproj", "{DCBC9A28-844A-4A1B-A877-41B7DAACFDCB}"
 EndProject

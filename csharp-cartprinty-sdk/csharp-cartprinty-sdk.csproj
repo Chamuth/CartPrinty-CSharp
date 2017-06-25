@@ -46,8 +46,10 @@
   <ItemGroup>
     <Compile Include="BillInformation.cs" />
     <Compile Include="CartPrinty.cs" />
+    <Compile Include="DefaultBillTheme.cs" />
     <Compile Include="Footer.cs" />
     <Compile Include="Header.cs" />
+    <Compile Include="IBillTheme.cs" />
     <Compile Include="Product.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

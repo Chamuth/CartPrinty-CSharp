@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 
 namespace csharp_cartprinty_sdk
 {
@@ -11,7 +7,7 @@ namespace csharp_cartprinty_sdk
     /// </summary>
     public class BillInformation
     {
-        public BillInformation(Header _headerInformation, List<Product> _products, Footer _footerInformation, float cash, float balance, int orderNumber)
+        public BillInformation(Header _headerInformation, List<Product> _products, Footer _footerInformation, float cash, float balance, int orderNumber, string _currencySymbol = "")
         {
             HeaderInformation = _headerInformation;
             Products = _products;
@@ -21,7 +17,12 @@ namespace csharp_cartprinty_sdk
             Cash = cash;
             Balance = balance;
             OrderNumber = orderNumber;
+
+            // Set the currency symbols
+            CurrencySymbol = _currencySymbol;
         }
+
+        public string CurrencySymbol { get; set; }
 
         public Header HeaderInformation { get; set; }
         public List<Product> Products { get; set; }

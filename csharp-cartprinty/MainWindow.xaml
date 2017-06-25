@@ -5,9 +5,9 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:csharp_cartprinty"
         mc:Ignorable="d"
-        Title="MainWindow" Height="600" Width="300">
+        Title="MainWindow" Height="700" Width="350">
     <Grid>
-        <FlowDocumentReader x:Name="Document">
+        <FlowDocumentScrollViewer VerticalScrollBarVisibility="Auto" x:Name="Document">
             <FlowDocument FlowDirection="LeftToRight">
                 <Section x:Name="header">
 
@@ -131,6 +131,6 @@
                     <Paragraph Margin="10" FontSize="10px" Foreground="Gray" TextAlignment="Center">CartPrinty (ninponix.com/cartprinty)</Paragraph>
                 </Section>
             </FlowDocument>
-        </FlowDocumentReader>
+        </FlowDocumentScrollViewer>
     </Grid>
 </Window>

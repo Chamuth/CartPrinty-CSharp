@@ -1,27 +1,25 @@
 ﻿using System;
-using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
 using System.Windows.Documents;
-using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 
 namespace csharp_cartprinty_sdk
 {
     public class CartPrinty
     {
-        
-        public static FlowDocument CreateBill(BillInformation billInformation)
+        public static FlowDocument CreateBill(BillInformation billInformation, IBillTheme theme = null)
         {
             var document = new FlowDocument();
             document.FlowDirection = FlowDirection.LeftToRight;
+
+            // Number formatting helper
+            NumberFormatInfo f = new NumberFormatInfo();
+            // Set the currency symbol from the billInformation input
+            f.CurrencySymbol = billInformation.CurrencySymbol;
 
             #region CREATE HEADER
 
@@ -133,6 +131,7 @@ namespace csharp_cartprinty_sdk
 
             #region ADD THE PRODUCTS
             var productTable = new Table();
+            productTable.Margin = new Thickness(0, 30, 0, 0);
 
             var productTableRows = new TableRowGroup();
             productTableRows.FontSize = 13;
@@ -164,7 +163,6 @@ namespace csharp_cartprinty_sdk
 
             productTableRows.Rows.Add(productTableHeaders);
 
-
             //ADD THE PRODUCTS
             foreach (var product in billInformation.Products)
             {
@@ -175,16 +173,16 @@ namespace csharp_cartprinty_sdk
                 productCell.Blocks.Add(productName);
 
                 var priceCell = new TableCell();
-                var priceName = new Paragraph(); priceName.Inlines.Add(product.PRODUCT_PRICE.ToString());
-                priceCell.Blocks.Add(productName);
+                var priceName = new Paragraph(); priceName.Inlines.Add(product.PRODUCT_PRICE.ToString("C", f));
+                priceCell.Blocks.Add(priceName);
 
                 var qtyCell = new TableCell();
                 var qtyName = new Paragraph(); qtyName.Inlines.Add(product.QUANTITY.ToString());
-                qtyCell.Blocks.Add(productName);
+                qtyCell.Blocks.Add(qtyName);
 
                 var amountCell = new TableCell();
-                var amountName = new Paragraph(); amountName.Inlines.Add(product.AMOUNT.ToString());
-                amountCell.Blocks.Add(productName);
+                var amountName = new Paragraph(); amountName.Inlines.Add(product.AMOUNT.ToString("C", f));
+                amountCell.Blocks.Add(amountName);
 
                 //Add the cells to the product row
                 productRow.Cells.Add(productCell);
@@ -211,6 +209,7 @@ namespace csharp_cartprinty_sdk
                 total_price += product.AMOUNT;
 
             var calculationTable = new Table();
+            calculationTable.Margin = new Thickness(0, 30, 0, 0);
             var calculationRowGroup = new TableRowGroup();
 
             var subtotal = new TableRow();
@@ -225,14 +224,14 @@ namespace csharp_cartprinty_sdk
             var subtotal_value = new TableCell();
             subtotal_value.TextAlignment = TextAlignment.Right;
             var subtotal_value_val = new Paragraph();
-            subtotal_value_val.Inlines.Add(total_price.ToString());
+            subtotal_value_val.Inlines.Add(total_price.ToString("C", f));
             subtotal_value.Blocks.Add(subtotal_value_val);
 
             //Add the subtotals to their parent rows
             subtotal.Cells.Add(subtotal_text);
             subtotal.Cells.Add(subtotal_value);
 
-            //Add the subtotal row in to the tablerowgroup
+            //Add the subtotal row in to the TableRowGroup
             calculationRowGroup.Rows.Add(subtotal);
 
             //ADD THE SPACERS
@@ -251,13 +250,14 @@ namespace csharp_cartprinty_sdk
             var cash_title = new TableCell();
             var cash_title_text = new Paragraph();
             cash_title_text.Inlines.Add("CASH");
+            cash_title_text.FontWeight = FontWeights.Bold;
             cash_title.Blocks.Add(cash_title_text);
             cashRow.Cells.Add(cash_title);
 
             var cash_value = new TableCell();
             cash_value.TextAlignment = TextAlignment.Right;
             var cash_value_text = new Paragraph();
-            cash_value_text.Inlines.Add(billInformation.Cash.ToString());
+            cash_value_text.Inlines.Add(billInformation.Cash.ToString("C", f));
             cash_value.Blocks.Add(cash_value_text);
             cashRow.Cells.Add(cash_value);
 
@@ -270,13 +270,14 @@ namespace csharp_cartprinty_sdk
             var balance_title = new TableCell();
             var balance_title_text = new Paragraph();
             balance_title_text.Inlines.Add("BALANCE");
+            balance_title_text.FontWeight = FontWeights.Bold;
             balance_title.Blocks.Add(balance_title_text);
             balanceRow.Cells.Add(balance_title);
 
             var balance_value = new TableCell();
             balance_value.TextAlignment = TextAlignment.Right;
             var balance_value_text = new Paragraph();
-            balance_value_text.Inlines.Add(billInformation.Balance.ToString());
+            balance_value_text.Inlines.Add(billInformation.Balance.ToString("C", f));
             balance_value.Blocks.Add(balance_value_text);
             balanceRow.Cells.Add(balance_value);
 
@@ -290,11 +291,13 @@ namespace csharp_cartprinty_sdk
             var orderNumberTitle = new TableCell();
             var orderNumberTitle_value = new Paragraph();
             orderNumberTitle_value.Inlines.Add("ORDER NO");
+            orderNumberTitle_value.FontWeight = FontWeights.Bold;
             orderNumberTitle.Blocks.Add(orderNumberTitle_value);
             orderNumberRow.Cells.Add(orderNumberTitle);
 
             var orderNumberValue = new TableCell();
             var orderNumberValue_value = new Paragraph();
+            orderNumberValue.TextAlignment = TextAlignment.Right;
             orderNumberValue_value.Inlines.Add(billInformation.OrderNumber.ToString());
             orderNumberValue.Blocks.Add(orderNumberValue_value);
             orderNumberRow.Cells.Add(orderNumberValue);
@@ -303,25 +306,36 @@ namespace csharp_cartprinty_sdk
 
             //ADD THE ROW GROUP TO THE TABLE
             calculationTable.RowGroups.Add(calculationRowGroup);
+
+            document.Blocks.Add(calculationTable);
             #endregion
 
             #region ADD THE FOOTER
             var footerMessage = new Paragraph();
+            footerMessage.Margin = new Thickness(0, 30, 0, 0);
             footerMessage.TextAlignment = TextAlignment.Center;
+            footerMessage.FontSize = 12;
             footerMessage.Inlines.Add(billInformation.FooterInformation.Message);
 
             var attribution = new Paragraph();
             attribution.TextAlignment = TextAlignment.Center;
             attribution.Inlines.Add("CartPrinty (ninponix.com/cartprinty)");
+            attribution.FontSize = 10;
 
             //Add the footerMessage and attribution
             document.Blocks.Add(footerMessage);
             document.Blocks.Add(attribution);
             #endregion
-            
 
+            #region APPLY THEME
+            if (theme == null)
+                document = new DefaultBillTheme().Apply(document); // Apply the default theme when no theme is specified
+            else
+                document = theme.Apply(document); // Apply the specified theme
+            #endregion
 
             return document;
         }
+
     }
 }
